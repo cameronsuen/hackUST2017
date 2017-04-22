@@ -1,32 +1,8 @@
 <ion-content>
-	<script>
-		window.fbAsyncInit = function() {
-		FB.init({
-			appId      : '1689992461294092',
-			xfbml      : true,
-			version    : 'v2.9'
-		});
-		FB.getLoginStatus(function(response){
-			if (response.status === 'connected'){
-				decument.getElementById('status').innerHTML = 'login successful';
-			}else if (response.status === 'not_authorized'){
-				document.getElementById('status').innerHTML = 'login failed';
-			}
-		}
-		FB.AppEvents.logPageView();
-		};
-
-	(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/zh_HK/sdk.js#xfbml=1&version=v2.9&appId=1689992461294092";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-	
-	</script>
-	
 	<div id="status"></div>
 	
-	<div class="fb-login-button" data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <button id="loginBtn" ion-button center (click)="facebookLogin()">
+        Log In with Facebook
+    </button>
+    
 </ion-content>
