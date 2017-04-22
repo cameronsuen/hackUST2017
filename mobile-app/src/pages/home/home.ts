@@ -29,7 +29,6 @@ export class HomePage implements OnInit {
     map: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
-
     }
 
     ngOnInit() {
@@ -79,10 +78,30 @@ export class HomePage implements OnInit {
             }
          
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+            this.placesService = new google.maps.places.PlacesService(this.map);
          }, (err) => {
              console.log(err);
          });
      
+    }
+    
+    createMarker(place) {
+        let marker = new google.maps.Marker({
+            map: this.map,
+            title: 'Exchange location',
+            position: place.geometry.location 
+        });
+
+    }
+    
+    chooseItem(item) {
+        this.placesService.getDetails( { placeId: item.place_id }, (place, status) => {
+
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                this.createMarker(place);
+            }
+
+        });
     }
 
 }
