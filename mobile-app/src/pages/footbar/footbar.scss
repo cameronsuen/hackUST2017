@@ -1,5 +1,11 @@
 footbar {
-
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 20vh;
+    background: white;
 }
 
 .paddingZero {

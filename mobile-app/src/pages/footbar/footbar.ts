@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -8,17 +8,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class footbarComponent {
 
-		dollar:any;
+	dollar: any;
+    
+    currency: string;
 
-		needCurrency:any;
+    @Input() holdCurrency: string;
+    @Input() needCurrency: string;
+
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
-    	this.dollar = '';
-    	this.needCurrency = 'USD';
+        this.currency = this.needCurrency;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad footbar');
+    }
+
+    changeToNeed() {
+        this.currency = this.needCurrency;
+    }
+
+    changeToHold() {
+        this.currency = this.holdCurrency;
     }
 
 }

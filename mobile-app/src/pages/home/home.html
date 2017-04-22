@@ -14,7 +14,6 @@
 
 
 <ion-content padding>
-    <footbar></footbar>
     <ion-searchbar 
         [(ngModel)]="autocomplete.query" 
         [showCancelButton]="true" 
@@ -44,4 +43,5 @@
     </ion-searchbar>
     <currency-modal id="currencyModal" (onCurrencyChange)="currencyChange($event)"></currency-modal>
     <div #map id="map"></div>
+    <footbar id="footbar" needCurrency="{{needCurrency}}" holdCurrency="{{holdCurrency}}"></footbar>
 </ion-content>
