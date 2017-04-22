@@ -1,5 +1,6 @@
 import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CurrencyModal } from '../../components/currency-modal/currency-modal';
 import { Geolocation } from '@ionic-native/geolocation';
 import { googlemaps } from 'googlemaps';
 
@@ -24,20 +25,27 @@ export class HomePage implements OnInit {
     autocomplete: any;
     acService:any;
     placesService: any; 
+    holdCurrency: string;
+    needCurrency: string;
+    field: string;
 
     @ViewChild('map') mapElement: ElementRef;
     map: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+    markers: any;
 
+    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     }
 
     ngOnInit() {
         this.acService = new google.maps.places.AutocompleteService();        
         this.autocompleteItems = [];
+        this.markers = [];
         this.autocomplete = {
             query: ''
         };  
+        this.needCurrency = '';
+        this.holdCurrency = '';
     }
 
     ionViewDidLoad() {
@@ -66,6 +74,20 @@ export class HomePage implements OnInit {
             });
         });
     }
+
+    currencyPopup(field) {
+        document.getElementById('currencyModal').style.display = 'block';
+        this.field = field;
+    }
+
+    currencyChange(currency) {
+        if (this.field == 'from') {
+            this.holdCurrency = currency;
+        } else {
+            this.needCurrency = currency;
+        }
+        document.getElementById('currencyModal').style.display = 'none';
+    }
     
     loadMap(){
  
@@ -79,10 +101,38 @@ export class HomePage implements OnInit {
             }
          
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+            this.placesService = new google.maps.places.PlacesService(this.map);
          }, (err) => {
              console.log(err);
          });
      
+    }
+    
+    createMarker(place) {
+        let marker = new google.maps.Marker({
+            map: this.map,
+            title: 'Exchange location',
+            position: place.geometry.location 
+        });
+
+        this.markers.push(marker);
+        
+        return marker;
+
+    }
+    
+    chooseItem(item) {
+        this.autocompleteItems = [];            
+        this.placesService.getDetails( { placeId: item.place_id }, (place, status) => {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (let i = 0; i < this.markers.length; ++i) {
+                    this.markers[i].setMap(null);
+                }
+                let marker = this.createMarker(place);
+                this.map.setCenter(marker.getPosition());
+            }
+
+        });
     }
 
 }
