@@ -1,6 +1,6 @@
 footbar {
     background-color: white;
-    display: none;
+    display: block;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -48,3 +48,7 @@ ion-icon.bigfont {
 	font-style: italic;
 }
 
+.rateFont {
+	// font-size: 2em;
+	color: #8e8e8e;
+}
