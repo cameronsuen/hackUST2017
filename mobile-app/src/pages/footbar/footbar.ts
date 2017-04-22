@@ -10,34 +10,31 @@ export class footbarComponent {
   
     // currency you selected, either hold or need 
     currency: string;
+    currencyAmount: string;
+    secondaryCurrency: string;
+    secondaryCurrencyAmount: string;
 
-		holdCurrencyAmount:any;
-		needCurrencyAmount:any;
+		holdCurrencyAmount: any;
+		needCurrencyAmount: any;
 
-		buyRate: any;
-		sellRate: any;
+		buyRate: number;
+		sellRate: number;
     
-    @Input() holdCurrency: string;
-    @Input() needCurrency: string;
+    @Input() holdCurrency: string;	// eg HKD 
+    @Input() needCurrency: string;	// eg USD
 
 		matched: boolean;
 		accepted: boolean;
 		declined: boolean;
+		finished: boolean;
 		holder: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
     	// Hard Coded
-    	this.holdCurrencyAmount = '0';
-    	this.holdCurrency = 'HKD';
 
-    	this.buyRate = 7.76; 	// you can sell 1 USD to bank for 7.76 HKD 
-    	this.sellRate = 7.8; 	// you can buy 1 USD from bank with 7.78 HKD 
+    	this.buyRate = 1/7.76; 	// you can sell 1 USD to bank for 7.76 HKD 
+    	this.sellRate = 7.8; 	// you can buy 1 USD from bank with 7.8 HKD 
     	
-    	this.needCurrency = 'USD';
-    	this.needCurrencyAmount = '0';
-      
-      this.currency = this.needCurrency;
-      
     	this.holder = {
     		name: "Micheal Wong",
     		pic: "../../assets/img/seller.jpg",
@@ -45,23 +42,36 @@ export class footbarComponent {
     	}
     	// Hard Coded End
 
+    	this.currencyAmount = '0';
+    	this.secondaryCurrencyAmount = '0';
+      this.currency = this.holdCurrency;
+      this.secondaryCurrency = this.needCurrency;
+    	
     	this.matched = false;
     	this.accepted = false;
     	this.declined = false;
+    	this.finished = false;
     }
 
-    calculateNeed() {
-    	// how much USD can I exchange for
-    	this.needCurrencyAmount = parseInt(this.holdCurrencyAmount) / this.sellRate;	
-    }
+    calculateCash() {
+    	if (this.currency === this.holdCurrency) {
+	    	// I have XXX USD, how much HKD can I exchange for ?
+    		this.secondaryCurrencyAmount = (parseFloat(this.currencyAmount) / this.buyRate).toFixed(2).toString();	
 
-    calculateHold() {
-    	// how much HKD do I need
-    	this.holdCurrencyAmount = (parseInt(this.needCurrencyAmount) * this.sellRate).toString();	
+    	} else {
+	    	// I want XXX HKD, how much USD do I need
+    		this.secondaryCurrencyAmount = (parseFloat(this.currencyAmount) * this.buyRate).toFixed(2).toString();	
+    	}
+    	this.currencyAmount = parseFloat(this.currencyAmount).toFixed(2).toString()
     }
 
     match() {
+    	if (this.currencyAmount === '0')
+    		return;
     	this.matched = true;
+    	this.declined = false;
+    	this.accepted = false;
+    	this.finished = false;
     }
 
     accept() {
@@ -70,6 +80,14 @@ export class footbarComponent {
 
     decline() {
     	this.declined = true;
+    	this.matched = false;
+    	this.accepted = false;
+    	this.finished = false;
+    }
+
+    finish() {
+    	this.finished = true;
+    	this.accepted = false;
     }
 
     isMatched() {
@@ -84,16 +102,30 @@ export class footbarComponent {
     	return this.declined;
     }
     
+    isFinished() {
+    	return this.finished;
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad footbar');
     }
 
     changeToNeed() {
         this.currency = this.needCurrency;
+        this.secondaryCurrency = this.holdCurrency;
+        this.currencyAmount = '0';
+        this.secondaryCurrencyAmount = '0';
+        // document.getElementById('holdBtn').setAttribute("color","default");
+        // document.getElementById('needBtn').setAttribute("color","light");
     }
 
     changeToHold() {
         this.currency = this.holdCurrency;
+        this.secondaryCurrency = this.needCurrency;
+        this.currencyAmount = '0';
+        this.secondaryCurrencyAmount = '0';
+        // document.getElementById('holdBtn').setAttribute("color","default");
+        // document.getElementById('needBtn').setAttribute("color","light");
     }
 
 }
