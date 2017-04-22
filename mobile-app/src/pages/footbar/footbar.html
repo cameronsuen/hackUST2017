@@ -1,0 +1,24 @@
+  <dir class="paddingZero">
+    <ion-grid class="paddingZero">
+      <ion-row>
+        <ion-col col-7>
+          <button ion-button>I have</button>
+          <button ion-button color="light">I want</button>
+        </ion-col>
+        <ion-col col-5>
+          <ion-row class="lineCenter">
+            <ion-col col-2>$</ion-col>
+            <ion-col col-6>
+              <ion-input class="marginZero" type="number" min="10" [value]="dollar" [(ngModel)]="dollar" placeholder='Amount'></ion-input>
+            </ion-col>
+            <ion-col col-4>{{needCurrency}}</ion-col>
+          </ion-row>
+        </ion-col> 
+      </ion-row>
+      <ion-row class='bigbtn'>
+        <ion-col>
+          <button ion-button full>REQUEST EXCHANGE</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </dir>
