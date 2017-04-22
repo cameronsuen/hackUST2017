@@ -32,14 +32,16 @@
         [showCancelButton]="true"
         (ionFocus)="currencyPopup('from')"
         (ionCancel)="dismiss()"
-        placeholder="From">
+        placeholder="From"
+		disabled (click)="ownKeyboard()" > 
     </ion-searchbar>
     <ion-searchbar
         [(ngModel)]="needCurrency"
         [showCancelButton]="true"
         (ionFocus)="currencyPopup('to')"
         (ionCancel)="dismiss()"
-        placeholder="To">
+        placeholder="To"
+		disabled (click)="ownKeyboard()">
     </ion-searchbar>
     <currency-modal id="currencyModal" (onCurrencyChange)="currencyChange($event)"></currency-modal>
     <div #map id="map"></div>
