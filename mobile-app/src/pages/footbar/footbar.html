@@ -7,17 +7,52 @@
         </ion-col>
         <ion-col col-5>
           <ion-row class="lineCenter">
-              <!--<ion-col col-2>$</ion-col>-->
-            <ion-col col-6>
+            <ion-col col-7>
               <ion-input class="marginZero" type="number" min="10" [value]="dollar" [(ngModel)]="dollar" placeholder='Amount'></ion-input>
             </ion-col>
-            <ion-col col-4>{{ currency }}</ion-col>
+            <ion-col col-5>{{ currency }}</ion-col>
           </ion-row>
         </ion-col> 
       </ion-row>
-      <ion-row class='bigbtn'>
+      <ion-row>
+        <ion-col col-10 offset-1>
+          <p class="smallText textCenter"> You will use {{holdCurrencyAmount}} {{holdCurrency}} to exchange</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class='textCenter' *ngIf="!isMatched()">
         <ion-col>
-          <button ion-button full>REQUEST EXCHANGE</button>
+          <button ion-button full (click)="match()">REQUEST EXCHANGE</button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isMatched() && !isAccepted() && !isDeclined()">
+        <ion-col col-4>
+          <img class="img-circle" src="../../assets/img/seller.jpg">
+        </ion-col>
+        <ion-col col-8 class="textCenter verticallyCenter">
+          <div>
+            <p>{{holder.name}}</p>
+            <p class="smallText"> {{holder.dist}} meters</p>
+          </div>
+          <div>
+            <ion-icon name="star" class="bigfont"></ion-icon>
+            <ion-icon name="star" class="bigfont"></ion-icon>
+            <ion-icon name="star" class="bigfont"></ion-icon>
+            <ion-icon name="star" class="bigfont"></ion-icon>
+            <ion-icon name="star-half" class="bigfont"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isMatched() && !isAccepted() && !isDeclined()">
+        <ion-col col-6>
+          <button ion-button color="secondary" full (click)="accept()">Accept</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button color="light" full (click)="decline()">Decline</button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isDeclined()">
+        <ion-col col-12 class="textCenter verticallyCenter">
+          <p>You have delined the service. See you next time. </p>
         </ion-col>
       </ion-row>
     </ion-grid>
