@@ -1,5 +1,6 @@
 import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CurrencyModal } from '../../components/currency-modal/currency-modal';
 import { Geolocation } from '@ionic-native/geolocation';
 import { googlemaps } from 'googlemaps';
 
@@ -24,6 +25,9 @@ export class HomePage implements OnInit {
     autocomplete: any;
     acService:any;
     placesService: any; 
+    holdCurrency: string;
+    needCurrency: string;
+    field: string;
 
     @ViewChild('map') mapElement: ElementRef;
     map: any;
@@ -40,6 +44,8 @@ export class HomePage implements OnInit {
         this.autocomplete = {
             query: ''
         };  
+        this.needCurrency = '';
+        this.holdCurrency = '';
     }
 
     ionViewDidLoad() {
@@ -67,6 +73,20 @@ export class HomePage implements OnInit {
                 self.autocompleteItems.push(prediction);
             });
         });
+    }
+
+    currencyPopup(field) {
+        document.getElementById('currencyModal').style.display = 'block';
+        this.field = field;
+    }
+
+    currencyChange(currency) {
+        if (this.field == 'from') {
+            this.holdCurrency = currency;
+        } else {
+            this.needCurrency = currency;
+        }
+        document.getElementById('currencyModal').style.display = 'none';
     }
     
     loadMap(){

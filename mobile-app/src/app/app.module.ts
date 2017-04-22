@@ -8,11 +8,13 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { CurrencyModal } from '../components/currency-modal/currency-modal';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CurrencyModal
   ],
   imports: [
     BrowserModule,
