@@ -28,12 +28,15 @@ export class HomePage implements OnInit {
     @ViewChild('map') mapElement: ElementRef;
     map: any;
 
+    markers: any;
+
     constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     }
 
     ngOnInit() {
         this.acService = new google.maps.places.AutocompleteService();        
         this.autocompleteItems = [];
+        this.markers = [];
         this.autocomplete = {
             query: ''
         };  
@@ -92,13 +95,21 @@ export class HomePage implements OnInit {
             position: place.geometry.location 
         });
 
+        this.markers.push(marker);
+        
+        return marker;
+
     }
     
     chooseItem(item) {
+        this.autocompleteItems = [];            
         this.placesService.getDetails( { placeId: item.place_id }, (place, status) => {
-
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-                this.createMarker(place);
+                for (let i = 0; i < this.markers.length; ++i) {
+                    this.markers[i].setMap(null);
+                }
+                let marker = this.createMarker(place);
+                this.map.setCenter(marker.getPosition());
             }
 
         });

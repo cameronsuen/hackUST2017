@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -7,21 +8,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class LoginPage {
 
-    autocompleteItems: any;
+    /*autocompleteItems: any;
     autocomplete: any;
     acService:any;
     placesService: any; 
 
     @ViewChild('map') mapElement: ElementRef;
-    map: any;
+    map: any;*/
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     }
 
 
     ionViewDidLoad() {
-        this.loadMap();
         console.log('ionViewDidLoad fbLogin');
     }
 
