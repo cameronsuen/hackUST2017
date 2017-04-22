@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the Home page.
@@ -20,7 +21,7 @@ export class HomePage {
 
     @ViewChild('map') mapElement: ElementRef;
     map: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
 
   }
 
@@ -31,16 +32,20 @@ export class HomePage {
 
  loadMap(){
  
-    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+     this.geolocation.getCurrentPosition().then((position) => {
+        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
  
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
- 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
- 
+        let mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+     
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+     }, (err) => {
+         console.log(err);
+     });
+     
   }
 
 }
