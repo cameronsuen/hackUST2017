@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -7,15 +7,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 
 export class footbarComponent {
+  
+    // currency you selected, either hold or need 
+    currency: string;
 
 		holdCurrencyAmount:any;
-		holdCurrency:any;
+		needCurrencyAmount:any;
 
 		buyRate: any;
 		sellRate: any;
-
-		needCurrency:any;
-		needCurrencyAmount:any;
+    
+    @Input() holdCurrency: string;
+    @Input() needCurrency: string;
 
 		matched: boolean;
 		accepted: boolean;
@@ -32,7 +35,9 @@ export class footbarComponent {
     	
     	this.needCurrency = 'USD';
     	this.needCurrencyAmount = '0';
-
+      
+      this.currency = this.needCurrency;
+      
     	this.holder = {
     		name: "Micheal Wong",
     		pic: "../../assets/img/seller.jpg",
@@ -43,7 +48,6 @@ export class footbarComponent {
     	this.matched = false;
     	this.accepted = false;
     	this.declined = false;
-
     }
 
     calculateNeed() {
@@ -82,6 +86,14 @@ export class footbarComponent {
     
     ionViewDidLoad() {
         console.log('ionViewDidLoad footbar');
+    }
+
+    changeToNeed() {
+        this.currency = this.needCurrency;
+    }
+
+    changeToHold() {
+        this.currency = this.holdCurrency;
     }
 
 }

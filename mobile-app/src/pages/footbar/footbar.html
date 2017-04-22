@@ -1,16 +1,16 @@
-  <dir class="paddingZero">
+  <div class="paddingZero">
     <ion-grid class="paddingZero">
       <ion-row>
         <ion-col col-7>
-          <button ion-button>I want</button>
-          <button ion-button color="light">I have</button>
+          <button ion-button (click)="changeToHold()">I have</button>
+          <button ion-button (click)="changeToNeed()" color="light">I want</button>
         </ion-col>
         <ion-col col-5>
           <ion-row class="lineCenter">
             <ion-col col-7>
-              <ion-input class="marginZero" type="number" min="10" [value]="needCurrencyAmount" [(ngModel)]="needCurrencyAmount" placeholder='Amount' (change)="calculateHold()"></ion-input>
+              <ion-input class="marginZero" type="number" min="10" [value]="dollar" [(ngModel)]="dollar" placeholder='Amount'></ion-input>
             </ion-col>
-            <ion-col col-5>{{needCurrency}}</ion-col>
+            <ion-col col-5>{{ currency }}</ion-col>
           </ion-row>
         </ion-col> 
       </ion-row>
@@ -56,4 +56,4 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </dir>
+  </div>

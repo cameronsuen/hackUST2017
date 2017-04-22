@@ -1,5 +1,11 @@
 footbar {
-	background-color: white;
+    background-color: white;
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 20vh;
 }
 
 .paddingZero {
@@ -21,6 +27,7 @@ footbar {
 .lineCenter {
 	padding-top: 12px;
 }
+
 .img-circle {
 	border-radius: 50%;
 }
@@ -40,3 +47,4 @@ ion-icon.bigfont {
 	color: #8e8e8e;
 	font-style: italic;
 }
+

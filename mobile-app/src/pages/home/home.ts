@@ -28,6 +28,7 @@ export class HomePage implements OnInit {
     holdCurrency: string;
     needCurrency: string;
     field: string;
+    filled: any;
 
     @ViewChild('map') mapElement: ElementRef;
     map: any;
@@ -46,6 +47,7 @@ export class HomePage implements OnInit {
         };  
         this.needCurrency = '';
         this.holdCurrency = '';
+        this.filled = [];
     }
 
     ionViewDidLoad() {
@@ -83,9 +85,23 @@ export class HomePage implements OnInit {
     currencyChange(currency) {
         if (this.field == 'from') {
             this.holdCurrency = currency;
+            if (this.filled.indexOf('from') <= -1) {
+                this.filled.push('from');
+            }
+
         } else {
             this.needCurrency = currency;
+            if (this.filled.indexOf('to') <= -1) {
+                this.filled.push('to');
+            }
+
+            
         }
+
+        if (this.filled.length == 3) {
+            document.getElementById('footbar').style.display = 'block';
+        }
+        
         document.getElementById('currencyModal').style.display = 'none';
     }
     
@@ -115,6 +131,8 @@ export class HomePage implements OnInit {
             position: place.geometry.location 
         });
 
+        
+
         this.markers.push(marker);
         
         return marker;
@@ -133,6 +151,14 @@ export class HomePage implements OnInit {
             }
 
         });
+
+        if (this.filled.indexOf('location') <= -1) {
+            this.filled.push('location');
+        }
+
+        if (this.filled.length == 3) {
+            document.getElementById('footbar').style.display = 'block';
+        }
     }
 
 }
