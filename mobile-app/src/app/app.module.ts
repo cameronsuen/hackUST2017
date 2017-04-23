@@ -11,6 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/fblogin/home';
+import { MatchPage } from '../pages/match/home';
 
 import { footbarComponent } from '../pages/footbar/footbar';
 import { CurrencyModal } from '../components/currency-modal/currency-modal';
@@ -23,6 +24,7 @@ import { RequestService } from '../providers/request-service';
     MyApp,
     HomePage,
     LoginPage,
+    MatchPage,
     footbarComponent,
     CurrencyModal
   ],
@@ -35,7 +37,8 @@ import { RequestService } from '../providers/request-service';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    MatchPage
   ],
   providers: [
     StatusBar,

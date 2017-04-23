@@ -23,6 +23,8 @@ export class footbarComponent {
 		buyRate: number;
 		sellRate: number;
     
+    @Input() coords: any;
+    @Input() isMatch: boolean;
     @Input() holdCurrency: string;	// eg HKD 
     @Input() needCurrency: string;	// eg USD
 
@@ -72,7 +74,7 @@ export class footbarComponent {
     	if (this.currencyAmount === '0')
     		return;
 
-        this.requestService.sendNotification();
+        this.requestService.sendNotification(this.currencyAmount, this.holdCurrency, this.needCurrency, this.currency,  this.coords);
 
     	this.matched = true;
     	this.declined = false;
@@ -106,6 +108,10 @@ export class footbarComponent {
 
     isDeclined() {
     	return this.declined;
+    }
+
+    isProvider() {
+        return this.isMatch;
     }
     
     isFinished() {

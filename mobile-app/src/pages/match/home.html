@@ -14,19 +14,6 @@
 
 
 <ion-content padding>
-    <ion-searchbar 
-        [(ngModel)]="autocomplete.query" 
-        [showCancelButton]="true" 
-        (ionInput)="updateSearch()" 
-        (ionCancel)="dismiss()"
-        placeholder="Start typing and select ...">
-    </ion-searchbar>
-        <ion-list>
-        <ion-item *ngFor="let item of autocompleteItems" 
-        (click)="chooseItem(item)">
-        {{ item.description }}
-        </ion-item>
-    </ion-list>
     <ion-searchbar
         [(ngModel)]="holdCurrency"
         [showCancelButton]="true"
@@ -45,5 +32,5 @@
     </ion-searchbar>
     <currency-modal id="currencyModal" (onCurrencyChange)="currencyChange($event)" ></currency-modal>
     <div #map id="map"></div>
-    <footbar id="footbar" needCurrency="{{needCurrency}}" holdCurrency="{{holdCurrency}}" coords="{{coords}}"></footbar>
+    <footbar id="footbar" needCurrency="{{needCurrency}}" holdCurrency="{{holdCurrency}}" coords="{{coords}}" match="true" style="display: block;"></footbar>
 </ion-content>

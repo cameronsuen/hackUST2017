@@ -13,21 +13,25 @@ export class RequestService {
          
     }
   
-    sendNotification() {
+    sendNotification(currencyAmount, holdCurrency, needCurrency, currency, coords) {
         console.log('Entering send');
         let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'key=AAAA7_jbKNI:APA91bFdhtRltuumj3u36yQFdqLmo4vCsaAeRIZvpt7fQWEYUPaOcfs2VvnR8NoOt1XL013SENtMTnQ5hB1sx337fItgxlPMYEw889sXqkhLDleBs2rKaf_NGvpMQ5sAxs_-er3rIBoR'});
         let options = new RequestOptions({ 'headers': headers });
         var url = 'https://fcm.googleapis.com/fcm/send';
         var body = {
           "notification":{
-            "title": "Notification title",
-            "body":"Notification body",
+            "title": "New Exchange Request",
+            "body":"Click to Open",
             "sound":"default",
             "click_action":"FCM_PLUGIN_ACTIVITY",
             "icon":"fcm_push_icon"
           },
           "data":{
-            "message": "Some message data to help render the content when received."
+              "message": "Some message data to help render the content when received.",
+              "currencyAmount": currencyAmount,
+              "holdCurrency": holdCurrency,
+              "currency": currency,
+              "coords": coords
           },
             "to":"/topics/topic",
             "priority":"high",

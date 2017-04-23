@@ -1,6 +1,6 @@
   <div class="paddingZero">
     <ion-grid class="paddingZero">
-      <ion-row *ngIf="!isMatched()">
+      <ion-row *ngIf="!isMatched() && !isProvider()">
         <ion-col col-7>
           <button ion-button (click)="changeToHold()" id="holdBtn">I have</button>
           <button ion-button (click)="changeToNeed()" id="needBtn" color='light'>I want</button>
@@ -15,14 +15,31 @@
         </ion-col> 
       </ion-row>
 
-      <ion-row *ngIf="!isMatched()">
+      <ion-row *ngIf="!isMatched() && !isProvider()">
         <ion-col col-10 offset-1>
           <p class="smallText textCenter"> You will use {{secondaryCurrencyAmount}} {{secondaryCurrency}} to exchange
           </p>
         </ion-col>
       </ion-row>
 
-      <ion-row class='textCenter' *ngIf="!isMatched()">
+      <ion-row *ngIf="!isMatched() && isProvider()">
+        <ion-col col-10 offset-1>
+          <h3 class="textCenter">
+              $200 HKD --> $1520 HKD
+          </h3>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row *ngIf="!isMatched() && isProvider()">
+        <ion-col col-10 offset-1>
+          <p class="smallText textCenter">
+            Today's rate 1 USD to 7.6 HKD, earn~$24
+          </p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class='textCenter' *ngIf="!isMatched() && !isProvider()">
         <ion-col>
           <button ion-button full (click)="match()">REQUEST EXCHANGE</button>
         </ion-col>
@@ -67,7 +84,7 @@
       </ion-row> -->
       
       <!-- OR: after accepting the offer -->
-      <ion-row *ngIf="isAccepted()" class="textCenter">
+      <ion-row *ngIf="isAccepted() && !isProvider()" class="textCenter">
         <ion-col col-12>
         
             <h5 class="smallText">Today: 1 USD to {{sellRate}} HKD</h5>
@@ -77,6 +94,18 @@
           
         </ion-col>
       </ion-row>
+        
+      <ion-row *ngIf="isAccepted() && isProvider()" class="textCenter">
+        <ion-col col-12>
+        
+            <h5 class="smallText">Today: 1 USD to {{sellRate}} HKD</h5>
+            <h3 class="rateFont marginZero"> 
+            {{currencyAmount}} {{currency}} = {{secondaryCurrencyAmount}} {{secondaryCurrency}} 
+            </h3>
+          
+        </ion-col>
+      </ion-row>
+
 
       <ion-row *ngIf="isAccepted()">
         <ion-col col-4>

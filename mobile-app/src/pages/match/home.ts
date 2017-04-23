@@ -15,11 +15,11 @@ declare var google;
 
 //@IonicPage()
 @Component({
-  selector: 'page-home',
+  selector: 'match-page',
   templateUrl: 'home.html',
 })
 
-export class HomePage implements OnInit {
+export class MatchPage implements OnInit {
 
     autocompleteItems: any;
     autocomplete: any;
@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
     ionViewDidLoad() {
         this.loadMap();
         console.log('ionViewDidLoad Home');
+        document.getElementById('footbar').style.display = 'block';
     }
 
     updateSearch() {
