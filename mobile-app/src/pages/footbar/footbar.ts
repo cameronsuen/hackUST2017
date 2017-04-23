@@ -1,6 +1,9 @@
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { RequestService } from '../../providers/request-service';
+import firebase from 'firebase';
+
 @Component({
   selector: 'footbar',
   templateUrl: 'footbar.html'
@@ -29,7 +32,7 @@ export class footbarComponent {
 		finished: boolean;
 		holder: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private requestService: RequestService) {
     	// Hard Coded
 
     	this.buyRate = 1/7.76; 	// you can sell 1 USD to bank for 7.76 HKD 
@@ -68,6 +71,9 @@ export class footbarComponent {
     match() {
     	if (this.currencyAmount === '0')
     		return;
+
+        this.requestService.sendNotification();
+
     	this.matched = true;
     	this.declined = false;
     	this.accepted = false;

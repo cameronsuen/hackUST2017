@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -14,6 +15,8 @@ import { LoginPage } from '../pages/fblogin/home';
 import { footbarComponent } from '../pages/footbar/footbar';
 import { CurrencyModal } from '../components/currency-modal/currency-modal';
 
+import { RequestService } from '../providers/request-service';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { CurrencyModal } from '../components/currency-modal/currency-modal';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -38,6 +42,7 @@ import { CurrencyModal } from '../components/currency-modal/currency-modal';
     SplashScreen,
     Geolocation,
     Facebook,
+    RequestService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

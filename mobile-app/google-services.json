@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1030672296146",
+    "firebase_url": "https://hackust2017-1492830202855.firebaseio.com",
+    "project_id": "hackust2017-1492830202855",
+    "storage_bucket": "hackust2017-1492830202855.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030672296146:android:3ff1e73215699ea5",
+        "android_client_info": {
+          "package_name": "com.ionicframework.mobileapp682047"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030672296146-bfgkkt98afc2la9evgfvuuu235b1at7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe8KFKP4T-f-vIjZAAqUX4AWoVSR-D98U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
